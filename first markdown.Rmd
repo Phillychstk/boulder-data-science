@@ -1,0 +1,68 @@
+---
+title: "R&Rmarkdown assignment 1"
+author: "Phillip Hughes"
+date: "2023-04-10"
+output: pdf_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+# Please complete all the tasks listed below. After completing the tasks download the .Rmd file and upload in the peer review item for grading.
+
+# Additionally please write text between the code chunks explaining what each code chunk is about.
+
+
+
+* item 1
+  + sub item 1
+  + sub item 2
+* item 2
+* item 3
+
+
+1. item 1
+2. item 2
+3. item 3
+
+
+*italic*
+*words*
+
+
+**Bold**
+**word**
+
+
+# this is the first header
+## this is the second
+
+
+```{r echo=FALSE}
+plot(mtcars)
+```
+
+
+
+| v1       |     v2        |  v3 |
+|----------|:-------------:|------:|
+| 1        |  654          | fs    |
+| 2        |    34         |   asg |
+|  3       | 12            |    rh |
+
+
+```{r}
+plot(3,4)
+```
+
+
+
+
+```{r}
+info <- sessionInfo()
+
+info
+```
+
+
