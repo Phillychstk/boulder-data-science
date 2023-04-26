@@ -1,0 +1,97 @@
+---
+title: "Untitled"
+author: "Phillip Hughes"
+date: "`r Sys.Date()`"
+output: pdf_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+# functions worksheet
+
+## loaded dice function
+
+```{r}
+die_graph <- function(max_rolls = 50000, sides = 8, num_of_dice = 3) {
+  rolls <- matrix(sample(c(1:6, 7, 8, 7, 7), max_rolls * num_of_dice, replace = TRUE), nrow = max_rolls)
+  
+  rolls_sum <- apply(rolls, 1, sum) # calculate the sum of the rolls for each trial
+  hist(rolls_sum, breaks = seq(num_of_dice, num_of_dice * sides, by = 1), main = "Die outcome", xlab = "Roll totals")
+}
+die_graph()
+```
+
+## function for rescale01()
+```{r, error=TRUE}
+rescale01 <- function(x) {
+  if (!is.numeric(x)) {
+    stop("inputs must all be numeric")
+  }
+  rng <- range(x, na.rm = TRUE, finite = TRUE)
+  rng <- (x - rng[1]) / (rng[2] - rng[1])
+  rng[rng== Inf]<-1
+  rng[rng== -Inf]<-0
+  rng
+}
+rescale01(C('a','b'))
+rescale01(c(Inf, 0, 2, 10))
+rescale01(c(-Inf, 4, 2, 7))
+rescale01(c(-Inf, 0, 2, 10, Inf))
+```
+
+## both vectors of same length where positions NA
+```{r,error=TRUE}
+samesies<- function(x,y){
+  if (length(x) != length(y)){
+    stop("both vectors must be the same length")
+  } 
+  total<- sum(is.na(x) & is.na(y))
+  total
+}
+x <- c(NA, NA, 3, NA)
+y <- c(NA, 2, NA, 4)
+samesies(x, y)
+
+x <- c(NA, NA, 3, NA,5)
+y <- c(NA, 2, NA, 4)
+samesies(x, y)
+```
+
+## Fizzbuzz function
+
+```{r}
+fizzbuzz<-function(x){
+  if(x%%3 ==0 & x%%5==0){
+    print("fizzbuzz")
+  } else if(x%%3==0){
+    print('fizz')
+  } else if(x%%5==0){
+    print("buzz")
+  }else {
+    print(x)
+  }
+}
+fizzbuzz(15)
+fizzbuzz(3)
+fizzbuzz(5)
+fizzbuzz(2)
+```
+
+
+##rewriting function with cut()
+```{r}
+GetTempDesc <- function(Temp) {
+  TempLabels <- c('Freezing', 'Cold', 'Cool', 'Warm', 'Hot')
+  TempBreaks <- c(-Inf, 0, 10, 20, 30, Inf)
+  TempRange <- cut(Temp, breaks = TempBreaks, labels = TempLabels)
+  return(TempRange)
+}
+GetTempDesc(41)
+GetTempDesc(29)
+GetTempDesc(19)
+GetTempDesc(09)
+GetTempDesc(-2)
+```
+
